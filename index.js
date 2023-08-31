@@ -1,14 +1,15 @@
-const app = require("express")();
+const express = require("express");
+const app = express();
+const path = require("path");
 require("dotenv").config();
 
-app.use((req, res, next) => {
-    res.setHeader('Content-Type', 'text/html');
-    res.setHeader('Cache-Control', 's-max-age=1, stale-while-revalidate');
-    next();
-});
+app.set("view engine", "ejs");
+app.set("views", path.join(__dirname, "/views"));
+
+app.use(express.static(path.join(__dirname, "/public")));
 
 app.get('/', (req, res) => {
-    res.send("Page Under Construction");
+    res.render("index");
 });
 
 const port = process.env.PORT;
