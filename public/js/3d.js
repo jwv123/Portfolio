@@ -24,18 +24,20 @@ controls.update();
 let mixer
 let model;
 const loader = new GLTFLoader();
-loader.load("../media/models/scene.gltf", function(gltf) {
-    model = gltf.scene;
-    model.position.set(0, 0, 0);
-    //gltf.scene.scale.set(2, 2, 2);
-    //mixer = new THREE.AnimationMixer(model);
-    //const play = mixer.clipAction(gltf.animations[0]);
-    //play.play();
-    scene.add(model);
-    camera.lookAt(model.position);
-    
-    
-})
+
+const init = async () => {
+    await loader.load("../media/models/scene.gltf", function(gltf) {
+        model = gltf.scene;
+        model.position.set(0, 0, 0);
+        //gltf.scene.scale.set(2, 2, 2);
+        //mixer = new THREE.AnimationMixer(model);
+        //const play = mixer.clipAction(gltf.animations[0]);
+        //play.play();
+        scene.add(model);
+        camera.lookAt(model.position);
+    });
+    document.querySelector(".loader").innerHTML = "";
+}
 
 const animate = () => {
      requestAnimationFrame(animate);
@@ -47,4 +49,5 @@ const animate = () => {
     //console.log(camera.position);
 }
 
+init();
 animate();
