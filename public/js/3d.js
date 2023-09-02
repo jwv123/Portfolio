@@ -23,12 +23,15 @@ var controls = new OrbitControls( camera, renderer.domElement )
 controls.update();
 
 const manager = new THREE.LoadingManager();
-
+const imgElement = document.createElement("img");
+imgElement.setAttribute("src", "media/images/loader.gif");
 manager.onStart = (url, itemsLoaded, itemTotal) => {
-    document.querySelector(".loader").innerHTML = 'Started loading file: ' + url + '.\nLoaded ' + itemsLoaded + ' of ' + itemTotal + ' files.';
+    
+    document.querySelector(".loader").appendChild(imgElement);
 }
 
 manager.onLoad = () => {
+    //document.querySelector(".loader").setAttribute("src", "");
     document.querySelector(".loader").innerHTML = "";
 }
 
@@ -45,7 +48,7 @@ const init = async () => {
         scene.add(model);
         camera.lookAt(model.position);
     });
-    //document.querySelector(".loader").innerHTML = "";
+    document.querySelector(".loader").innerHTML = "";
 }
 
 const animate = () => {

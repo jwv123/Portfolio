@@ -15,3 +15,8 @@ header {
     text-align: center;
     font-family: Arial, Helvetica, sans-serif;
 }
+
+.loader img {
+    margin: 0 auto;
+    width: 150px;
+}
