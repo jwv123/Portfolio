@@ -23,11 +23,9 @@ var controls = new OrbitControls( camera, renderer.domElement )
 controls.update();
 
 const manager = new THREE.LoadingManager();
-const imgElement = document.createElement("img");
-imgElement.setAttribute("src", "media/images/loader.gif");
+
 manager.onStart = (url, itemsLoaded, itemTotal) => {
-    
-    document.querySelector(".loader").appendChild(imgElement);
+    document.querySelector(".loading-image").setAttribute("src", "media/images/loader.gif");
 }
 
 manager.onLoad = () => {
