@@ -21,10 +21,19 @@ document.querySelector("#world").append(renderer.domElement);
 
 var controls = new OrbitControls( camera, renderer.domElement )
 controls.update();
-let mixer
-let model;
-const loader = new GLTFLoader();
 
+const manager = new THREE.LoadingManager();
+
+manager.onStart = (url, itemsLoaded, itemTotal) => {
+    document.querySelector(".loader").innerHTML = 'Started loading file: ' + url + '.\nLoaded ' + itemsLoaded + ' of ' + itemTotal + ' files.';
+}
+
+manager.onLoad = () => {
+    document.querySelector(".loader").innerHTML = "";
+}
+
+let model;
+const loader = new GLTFLoader(manager);
 const init = async () => {
     await loader.load("../media/models/scene.gltf", function(gltf) {
         model = gltf.scene;
@@ -36,7 +45,7 @@ const init = async () => {
         scene.add(model);
         camera.lookAt(model.position);
     });
-    document.querySelector(".loader").innerHTML = "";
+    //document.querySelector(".loader").innerHTML = "";
 }
 
 const animate = () => {
